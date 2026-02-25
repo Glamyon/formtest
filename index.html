@@ -31,14 +31,12 @@
             background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
             min-height: 100vh;
             padding: 20px;
-            /* 修复：移除display: flex相关属性 */
         }
 
         .container {
             max-width: 800px;
             width: 100%;
             margin: 0 auto;
-            /* 修复：添加垂直内边距确保卡片不会紧贴边缘 */
             padding: 20px 0;
         }
 
@@ -141,7 +139,6 @@
             resize: vertical;
         }
 
-        /* 项目类型多选样式 */
         .category-options {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -172,7 +169,6 @@
             background: var(--primary-light);
         }
 
-        /* 勾选框样式 */
         .checkmark {
             position: absolute;
             top: 10px;
@@ -199,7 +195,6 @@
             font-weight: bold;
         }
 
-        /* 图标样式 */
         .category-icon {
             font-size: 2.5rem;
             color: var(--primary);
@@ -227,7 +222,6 @@
             font-weight: 500;
         }
 
-        /* 预算选项 */
         .budget-options {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -258,7 +252,6 @@
             color: var(--primary-dark);
         }
 
-        /* 联系方式选项 */
         .contact-options {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -289,7 +282,6 @@
             color: var(--primary-dark);
         }
 
-        /* 提交按钮 */
         .submit-btn {
             width: 100%;
             padding: 18px;
@@ -318,7 +310,6 @@
             transform: translateY(0);
         }
 
-        /* 可选字段 */
         .optional {
             opacity: 0.85;
         }
@@ -331,7 +322,6 @@
             background: white;
         }
 
-        /* 错误信息 */
         .error {
             color: var(--danger);
             font-size: 0.85rem;
@@ -340,7 +330,6 @@
             padding-left: 4px;
         }
 
-        /* 加载状态 */
         .loading {
             display: none;
             text-align: center;
@@ -362,7 +351,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* 新增问题区域 */
         .additional-questions {
             display: grid;
             gap: 20px;
@@ -390,7 +378,6 @@
             display: block;
         }
 
-        /* 日期输入 */
         .date-input {
             position: relative;
         }
@@ -404,7 +391,6 @@
             pointer-events: none;
         }
 
-        /* 文件上传 */
         .file-upload {
             border: 2px dashed var(--border);
             border-radius: 10px;
@@ -450,7 +436,6 @@
             font-size: 0.9rem;
         }
 
-        /* 成功模态框 */
         .success-modal {
             display: none;
             position: fixed;
@@ -574,7 +559,6 @@
             </div>
 
             <form id="projectForm" class="form-content">
-                <!-- 基本联系信息 -->
                 <div class="form-section">
                     <div class="section-title">
                         <i class="fas fa-user"></i>
@@ -599,7 +583,6 @@
                     </div>
                 </div>
 
-                <!-- 项目类型 (多选) -->
                 <div class="form-section">
                     <div class="section-title">
                         <i class="fas fa-project-diagram"></i>
@@ -607,7 +590,6 @@
                     </div>
                     <div class="form-hint">Select all services you need (click to select/deselect)</div>
                     <div class="category-options" id="projectTypeOptions">
-                        <!-- 视频制作服务 -->
                         <div class="category-option" data-value="Product Promo Video">
                             <div class="checkmark"></div>
                             <div class="category-icon">
@@ -644,7 +626,6 @@
                             <div class="category-type">Video Production</div>
                         </div>
 
-                        <!-- 品牌视觉服务 -->
                         <div class="category-option" data-value="Logo Design">
                             <div class="checkmark"></div>
                             <div class="category-icon">
@@ -685,7 +666,6 @@
                     <div class="error" id="projectTypeError">Please select at least one project type</div>
                 </div>
 
-                <!-- 项目描述 -->
                 <div class="form-section">
                     <div class="section-title">
                         <i class="fas fa-file-alt"></i>
@@ -698,7 +678,6 @@
                     </div>
                 </div>
 
-                <!-- 新增的客户问题 -->
                 <div class="form-section">
                     <div class="section-title">
                         <i class="fas fa-question-circle"></i>
@@ -746,7 +725,6 @@
                     </div>
                 </div>
 
-                <!-- 预算范围 -->
                 <div class="form-section">
                     <div class="section-title">
                         <i class="fas fa-money-bill-wave"></i>
@@ -764,7 +742,6 @@
                     <div class="error" id="budgetError">Please select a budget range</div>
                 </div>
 
-                <!-- 首选联系方式 -->
                 <div class="form-section">
                     <div class="section-title">
                         <i class="fas fa-phone-alt"></i>
@@ -781,7 +758,6 @@
                     <div class="error" id="contactError">Please select a contact method</div>
                 </div>
 
-                <!-- 文件上传 (可选) -->
                 <div class="form-section optional">
                     <div class="section-title">
                         <i class="fas fa-cloud-upload-alt"></i>
@@ -798,7 +774,6 @@
                     <div class="selected-files" id="selectedFiles"></div>
                 </div>
 
-                <!-- 其他说明 -->
                 <div class="form-section optional">
                     <div class="section-title">
                         <i class="fas fa-sticky-note"></i>
@@ -823,7 +798,6 @@
         </div>
     </div>
 
-    <!-- 成功模态框 -->
     <div class="success-modal" id="successModal">
         <div class="success-content">
             <div class="success-icon">
@@ -973,7 +947,16 @@
         
         function validateField(fieldId) {
             const element = document.getElementById(fieldId);
-            const errorElement = document.getElementById(fieldId + 'Error');
+            
+            // 修正错误元素ID的映射
+            let errorElementId = fieldId + 'Error';
+            if (fieldId === 'projectDescription') {
+                errorElementId = 'descriptionError';
+            } else if (fieldId === 'contactMethod') {
+                errorElementId = 'contactError';
+            }
+            
+            const errorElement = document.getElementById(errorElementId);
             
             if (!element) return true;
             
@@ -992,12 +975,14 @@
                     isValid = value !== '';
             }
             
-            if (!isValid) {
-                errorElement.style.display = 'block';
-                if (element.style) element.style.borderColor = 'var(--danger)';
-            } else {
-                errorElement.style.display = 'none';
-                if (element.style) element.style.borderColor = '';
+            if (errorElement) {
+                if (!isValid) {
+                    errorElement.style.display = 'block';
+                    if (element.style) element.style.borderColor = 'var(--danger)';
+                } else {
+                    errorElement.style.display = 'none';
+                    if (element.style) element.style.borderColor = '';
+                }
             }
             
             return isValid;
@@ -1049,8 +1034,8 @@
             document.querySelector('.submit-btn').disabled = true;
             
             try {
-                // 发送到Cloudflare Worker
-                const response = await fetch('https://newsfrom.yonglamlongway.workers.dev/', {
+                // 发送到Cloudflare Worker - 需要替换为你的实际Worker地址
+                const response = await fetch('https://newsfrom.yonglamlongway.workers.dev', {  // 这里需要替换
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1082,11 +1067,12 @@
                         }
                     }, 1000);
                 } else {
-                    throw new Error('Submission failed');
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Submission failed');
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);
-                alert('There was an error submitting your request. Please try again.');
+                alert('There was an error submitting your request. Please try again. Error: ' + error.message);
             } finally {
                 document.getElementById('loading').style.display = 'none';
                 document.querySelector('.submit-btn').disabled = false;
