@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Project Application Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #dbeafe;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --light: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            /* 修复：移除display: flex相关属性 */
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            /* 修复：添加垂直内边距确保卡片不会紧贴边缘 */
+            padding: 20px 0;
+        }
+
+        .form-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .form-header {
+            background: var(--primary);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .form-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-content {
+            padding: 40px;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-title i {
+            font-size: 1.2rem;
+        }
+
+        .required::after {
+            content: "*";
+            color: var(--danger);
+            margin-left: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .form-hint {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--light);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            background: white;
+        }
+
+        textarea.form-control {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        /* 项目类型多选样式 */
+        .category-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .category-option {
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--light);
+            text-align: center;
+            position: relative;
+        }
+
+        .category-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            background: white;
+            box-shadow: var(--shadow);
+        }
+
+        .category-option.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        /* 勾选框样式 */
+        .checkmark {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .category-option.selected .checkmark {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .category-option.selected .checkmark::after {
+            content: "✓";
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* 图标样式 */
+        .category-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            height: 60px;
+            width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+        }
+
+        .category-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+
+        .category-type {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* 预算选项 */
+        .budget-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .budget-option {
+            padding: 20px 12px;
+            text-align: center;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--light);
+            font-weight: 500;
+        }
+
+        .budget-option:hover {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .budget-option.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* 联系方式选项 */
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .contact-option {
+            padding: 18px 12px;
+            text-align: center;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--light);
+            font-weight: 500;
+        }
+
+        .contact-option:hover {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .contact-option.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* 提交按钮 */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* 可选字段 */
+        .optional {
+            opacity: 0.85;
+        }
+
+        .optional .form-control {
+            background: #f1f5f9;
+        }
+
+        .optional .form-control:focus {
+            background: white;
+        }
+
+        /* 错误信息 */
+        .error {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 6px;
+            display: none;
+            padding-left: 4px;
+        }
+
+        /* 加载状态 */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid rgba(59, 130, 246, 0.1);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 新增问题区域 */
+        .additional-questions {
+            display: grid;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .question-item {
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            background: var(--light);
+        }
+
+        .question-item label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .question-item .hint {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* 日期输入 */
+        .date-input {
+            position: relative;
+        }
+
+        .date-input i {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+            pointer-events: none;
+        }
+
+        /* 文件上传 */
+        .file-upload {
+            border: 2px dashed var(--border);
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--light);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .file-upload i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .selected-files {
+            margin-top: 10px;
+        }
+
+        .selected-file {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--light);
+            border-radius: 6px;
+            margin-bottom: 5px;
+        }
+
+        .remove-file {
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* 成功模态框 */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .success-content {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        .success-message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #374151;
+            margin-bottom: 20px;
+        }
+
+        .success-message p {
+            margin-bottom: 15px;
+        }
+
+        .countdown {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                padding: 15px 0;
+            }
+            
+            .form-header, .form-content {
+                padding: 25px;
+            }
+            
+            .form-header h1 {
+                font-size: 2rem;
+            }
+            
+            .category-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .budget-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 10px 0;
+            }
+            
+            .form-header, .form-content {
+                padding: 20px;
+            }
+            
+            .category-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .budget-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-option {
+                padding: 20px 15px;
+            }
+            
+            .category-icon {
+                font-size: 2rem;
+                height: 50px;
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-card">
+            <div class="form-header">
+                <h1>Project Application Form</h1>
+                <p>Submit your project requirements and we'll match you with the perfect team</p>
+            </div>
+
+            <form id="projectForm" class="form-content">
+                <!-- 基本联系信息 -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-user"></i>
+                        <span class="required">Full Name / Company Name</span>
+                    </div>
+                    <div class="form-hint">Enter your full name or company name</div>
+                    <div class="form-group">
+                        <input type="text" id="fullName" class="form-control" placeholder="John Smith or ABC Company" required>
+                        <div class="error" id="fullNameError">Please enter your name or company name</div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-envelope"></i>
+                        <span class="required">Email</span>
+                    </div>
+                    <div class="form-hint">Enter your email so we can contact you</div>
+                    <div class="form-group">
+                        <input type="email" id="email" class="form-control" placeholder="example@domain.com" required>
+                        <div class="error" id="emailError">Please enter a valid email address</div>
+                    </div>
+                </div>
+
+                <!-- 项目类型 (多选) -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-project-diagram"></i>
+                        <span class="required">Project Type</span>
+                    </div>
+                    <div class="form-hint">Select all services you need (click to select/deselect)</div>
+                    <div class="category-options" id="projectTypeOptions">
+                        <!-- 视频制作服务 -->
+                        <div class="category-option" data-value="Product Promo Video">
+                            <div class="checkmark"></div>
+                            <div class="category-icon">
+                                <i class="fas fa-film"></i>
+                            </div>
+                            <div class="category-name">Product Promo Video</div>
+                            <div class="category-type">Video Production</div>
+                        </div>
+
+                        <div class="category-option" data-value="Advertising Video">
+                            <div class="checkmark"></div>
+                            <div class="category-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="category-name">Advertising Video</div>
+                            <div class="category-type">Video Production</div>
+                        </div>
+
+                        <div class="category-option" data-value="Explainer Animation">
+                            <div class="checkmark"></div>
+                            <div class="category-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="category-name">Explainer Animation</div>
+                            <div class="category-type">Video Production</div>
+                        </div>
+
+                        <div class="category-option" data-value="YouTube Editing">
+                            <div class="checkmark"></div>
+                            <div class="category-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="category-name">YouTube Editing</div>
+                            <div class="category-type">Video Production</div>
+                        </div>
+
+                        <!-- 品牌视觉服务 -->
+                        <div class="category-option" data-value="Logo Design">
+                            <div class="checkmark"></div>
+                            <div class="category-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="category-name">Logo Design</div>
+                            <div class="category-type">Brand Visual</div>
+                        </div>
+
+                        <div class="category-option" data-value="Brand Visual System">
+                            <div class="checkmark"></div>
+                            <div class="category-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="category-name">Brand Visual System</div>
+                            <div class="category-type">Brand Visual</div>
+                        </div>
+
+                        <div class="category-option" data-value="Packaging Design">
+                            <div class="checkmark"></div>
+                            <div class="category-icon">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <div class="category-name">Packaging Design</div>
+                            <div class="category-type">Brand Visual</div>
+                        </div>
+
+                        <div class="category-option" data-value="Landing Page Visual">
+                            <div class="checkmark"></div>
+                            <div class="category-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="category-name">Landing Page Visual</div>
+                            <div class="category-type">Brand Visual</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="projectType" required>
+                    <div class="error" id="projectTypeError">Please select at least one project type</div>
+                </div>
+
+                <!-- 项目描述 -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="required">Project Description</span>
+                    </div>
+                    <div class="form-hint">Briefly describe what you want us to help with</div>
+                    <div class="form-group">
+                        <textarea id="projectDescription" class="form-control" placeholder="Please describe your project requirements, goals, and any specific details..." required></textarea>
+                        <div class="error" id="descriptionError">Please provide a project description</div>
+                    </div>
+                </div>
+
+                <!-- 新增的客户问题 -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Additional Project Details</span>
+                    </div>
+                    <div class="additional-questions">
+                        <div class="question-item">
+                            <label>What are the main goals of this project?</label>
+                            <div class="hint">What do you hope to achieve? (e.g., increase sales, improve brand awareness, educate customers)</div>
+                            <textarea id="projectGoals" class="form-control" placeholder="Please describe your primary objectives..."></textarea>
+                        </div>
+
+                        <div class="question-item">
+                            <label>Who is your target audience?</label>
+                            <div class="hint">Describe the people you want to reach with this project</div>
+                            <textarea id="targetAudience" class="form-control" placeholder="e.g., Young professionals aged 25-40, small business owners, parents..."></textarea>
+                        </div>
+
+                        <div class="question-item">
+                            <label>Do you have any reference materials or inspiration?</label>
+                            <div class="hint">Links to websites, designs, or examples you like (optional)</div>
+                            <textarea id="references" class="form-control" placeholder="Paste links or describe examples that inspire you..."></textarea>
+                        </div>
+
+                        <div class="question-item">
+                            <label>What is your timeline expectation?</label>
+                            <div class="hint">When do you need this completed? (e.g., "Within 2 weeks" or "2024-03-15")</div>
+                            <div class="form-group date-input">
+                                <input type="text" id="timeline" class="form-control" placeholder="Enter date or timeline description">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                        </div>
+
+                        <div class="question-item">
+                            <label>What is your priority level?</label>
+                            <div class="hint">How urgent is this project?</div>
+                            <select id="priority" class="form-control">
+                                <option value="">Select priority level</option>
+                                <option value="Low">Low - No specific deadline</option>
+                                <option value="Medium">Medium - Within 1 month</option>
+                                <option value="High">High - Within 2 weeks</option>
+                                <option value="Urgent">Urgent - Within 1 week</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 预算范围 -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span class="required">Budget Range (USD)</span>
+                    </div>
+                    <div class="form-hint">Select your project budget range</div>
+                    <div class="budget-options" id="budgetOptions">
+                        <div class="budget-option" data-value="<$300">&lt;$300</div>
+                        <div class="budget-option" data-value="$301–$800">$301–$800</div>
+                        <div class="budget-option" data-value="$801–$2000">$801–$2,000</div>
+                        <div class="budget-option" data-value="$2001–$5000">$2,001–$5,000</div>
+                        <div class="budget-option" data-value="$5000+">$5,000+</div>
+                    </div>
+                    <input type="hidden" id="budget" required>
+                    <div class="error" id="budgetError">Please select a budget range</div>
+                </div>
+
+                <!-- 首选联系方式 -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-phone-alt"></i>
+                        <span class="required">Preferred Contact Method</span>
+                    </div>
+                    <div class="form-hint">How should we contact you?</div>
+                    <div class="contact-options" id="contactOptions">
+                        <div class="contact-option" data-value="Email">Email</div>
+                        <div class="contact-option" data-value="WhatsApp">WhatsApp</div>
+                        <div class="contact-option" data-value="Zoom">Zoom</div>
+                        <div class="contact-option" data-value="Phone">Phone</div>
+                    </div>
+                    <input type="hidden" id="contactMethod" required>
+                    <div class="error" id="contactError">Please select a contact method</div>
+                </div>
+
+                <!-- 文件上传 (可选) -->
+                <div class="form-section optional">
+                    <div class="section-title">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>File Upload (Optional)</span>
+                    </div>
+                    <div class="form-hint">Upload reference materials (images, scripts, logos, etc.) - Max file size: 10MB</div>
+                    
+                    <div class="file-upload" id="fileUpload">
+                        <i class="fas fa-file-upload"></i>
+                        <p>Click to upload files or drag and drop</p>
+                        <input type="file" id="fileInput" multiple>
+                    </div>
+                    
+                    <div class="selected-files" id="selectedFiles"></div>
+                </div>
+
+                <!-- 其他说明 -->
+                <div class="form-section optional">
+                    <div class="section-title">
+                        <i class="fas fa-sticky-note"></i>
+                        <span>Additional Notes (Optional)</span>
+                    </div>
+                    <div class="form-hint">Any extra details or special requests?</div>
+                    <div class="form-group">
+                        <textarea id="additionalNotes" class="form-control" placeholder="Please provide any additional information that might help us understand your needs..."></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Request
+                </button>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Submitting your request...</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 成功模态框 -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="success-message">
+                <p>Thank you! Your request has been submitted. We will review it and match you with a suitable team shortly.</p>
+            </div>
+            <div class="countdown" id="countdown">
+                Redirecting to goaoxor.com in 5 seconds...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 项目类型多选功能
+        const projectTypeOptions = document.querySelectorAll('#projectTypeOptions .category-option');
+        const projectTypeInput = document.getElementById('projectType');
+        
+        projectTypeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                option.classList.toggle('selected');
+                updateSelectedProjectTypes();
+            });
+        });
+
+        function updateSelectedProjectTypes() {
+            const selected = Array.from(projectTypeOptions)
+                .filter(opt => opt.classList.contains('selected'))
+                .map(opt => opt.dataset.value);
+            
+            projectTypeInput.value = selected.join(', ');
+            
+            if (selected.length > 0) {
+                document.getElementById('projectTypeError').style.display = 'none';
+            }
+        }
+
+        // 预算选择
+        const budgetOptions = document.querySelectorAll('#budgetOptions .budget-option');
+        const budgetInput = document.getElementById('budget');
+        
+        budgetOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                budgetOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                budgetInput.value = option.dataset.value;
+                document.getElementById('budgetError').style.display = 'none';
+            });
+        });
+
+        // 联系方式选择
+        const contactOptions = document.querySelectorAll('#contactOptions .contact-option');
+        const contactInput = document.getElementById('contactMethod');
+        
+        contactOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                contactOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                contactInput.value = option.dataset.value;
+                document.getElementById('contactError').style.display = 'none';
+            });
+        });
+
+        // 文件上传功能
+        const fileUpload = document.getElementById('fileUpload');
+        const fileInput = document.getElementById('fileInput');
+        const selectedFilesDiv = document.getElementById('selectedFiles');
+        let selectedFiles = [];
+
+        fileUpload.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileUpload.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUpload.style.borderColor = 'var(--primary)';
+            fileUpload.style.backgroundColor = 'var(--primary-light)';
+        });
+
+        fileUpload.addEventListener('dragleave', () => {
+            fileUpload.style.borderColor = 'var(--border)';
+            fileUpload.style.backgroundColor = 'var(--light)';
+        });
+
+        fileUpload.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUpload.style.borderColor = 'var(--border)';
+            fileUpload.style.backgroundColor = 'var(--light)';
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                if (file.size > 10 * 1024 * 1024) { // 10MB限制
+                    alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+                    return;
+                }
+                
+                if (!selectedFiles.some(f => f.name === file.name)) {
+                    selectedFiles.push(file);
+                }
+            });
+            
+            renderSelectedFiles();
+        }
+
+        function renderSelectedFiles() {
+            selectedFilesDiv.innerHTML = '';
+            
+            selectedFiles.forEach((file, index) => {
+                const fileDiv = document.createElement('div');
+                fileDiv.className = 'selected-file';
+                fileDiv.innerHTML = `
+                    <i class="fas fa-file"></i>
+                    <span>${file.name} (${formatFileSize(file.size)})</span>
+                    <span class="remove-file" data-index="${index}">✕</span>
+                `;
+                selectedFilesDiv.appendChild(fileDiv);
+            });
+
+            // 添加删除事件监听器
+            document.querySelectorAll('.remove-file').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    selectedFiles.splice(index, 1);
+                    renderSelectedFiles();
+                });
+            });
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // 表单验证
+        const form = document.getElementById('projectForm');
+        const requiredFields = ['fullName', 'email', 'projectType', 'projectDescription', 'budget', 'contactMethod'];
+        
+        function validateField(fieldId) {
+            const element = document.getElementById(fieldId);
+            const errorElement = document.getElementById(fieldId + 'Error');
+            
+            if (!element) return true;
+            
+            let isValid = true;
+            let value = element.value.trim();
+            
+            switch(fieldId) {
+                case 'email':
+                    isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+                    break;
+                case 'projectType':
+                    const selectedTypes = value.split(',').filter(v => v.trim());
+                    isValid = selectedTypes.length > 0;
+                    break;
+                default:
+                    isValid = value !== '';
+            }
+            
+            if (!isValid) {
+                errorElement.style.display = 'block';
+                if (element.style) element.style.borderColor = 'var(--danger)';
+            } else {
+                errorElement.style.display = 'none';
+                if (element.style) element.style.borderColor = '';
+            }
+            
+            return isValid;
+        }
+
+        // 实时验证
+        document.getElementById('fullName').addEventListener('blur', () => validateField('fullName'));
+        document.getElementById('email').addEventListener('blur', () => validateField('email'));
+        document.getElementById('projectDescription').addEventListener('blur', () => validateField('projectDescription'));
+
+        // 表单提交
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            let isValid = true;
+            
+            requiredFields.forEach(fieldId => {
+                if (!validateField(fieldId)) {
+                    isValid = false;
+                }
+            });
+            
+            if (!isValid) {
+                const firstError = document.querySelector('.error[style*="display: block"]');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+            
+            // 收集表单数据
+            const formData = {
+                fullName: document.getElementById('fullName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                projectType: projectTypeInput.value,
+                projectDescription: document.getElementById('projectDescription').value.trim(),
+                projectGoals: document.getElementById('projectGoals').value.trim() || null,
+                targetAudience: document.getElementById('targetAudience').value.trim() || null,
+                references: document.getElementById('references').value.trim() || null,
+                timeline: document.getElementById('timeline').value.trim() || null,
+                priority: document.getElementById('priority').value || null,
+                budget: budgetInput.value,
+                contactMethod: contactInput.value,
+                additionalNotes: document.getElementById('additionalNotes').value.trim() || null,
+                fileCount: selectedFiles.length
+            };
+            
+            document.getElementById('loading').style.display = 'block';
+            document.querySelector('.submit-btn').disabled = true;
+            
+            try {
+                // 发送到Cloudflare Worker
+                const response = await fetch('https://your-worker.youraccount.workers.dev', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    // 显示成功模态框
+                    document.getElementById('successModal').style.display = 'flex';
+                    
+                    // 重置表单
+                    form.reset();
+                    selectedFiles = [];
+                    renderSelectedFiles();
+                    document.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+                    projectTypeInput.value = '';
+                    
+                    // 5秒倒计时后跳转
+                    let seconds = 5;
+                    const countdownElement = document.getElementById('countdown');
+                    const countdownInterval = setInterval(() => {
+                        seconds--;
+                        countdownElement.textContent = `Redirecting to goaoxor.com in ${seconds} seconds...`;
+                        
+                        if (seconds <= 0) {
+                            clearInterval(countdownInterval);
+                            window.location.href = 'https://goaoxor.com';
+                        }
+                    }, 1000);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('There was an error submitting your request. Please try again.');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.querySelector('.submit-btn').disabled = false;
+            }
+        });
+
+        // 移动端优化
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.category-option, .budget-option, .contact-option').forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                element.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
